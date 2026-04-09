@@ -272,3 +272,14 @@ export function isVersionInRange(
   }
   return false;
 }
+
+/**
+ * normalize module specifier for generated import/export statements
+ * keep package/bare specifiers unchanged and normalize path separators
+ */
+export function toImportSpecifier(source: string) {
+  if (!source) return source;
+  if (/^(?:node|data|file):/.test(source)) return source;
+
+  return winPath(source);
+}
